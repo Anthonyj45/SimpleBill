@@ -1,10 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>SimpleBilling</title>
         <meta charset="utf-8"/>
+        <link ref="stylesheet" href="{% static 'simpleBilling/css/styles.css' %}">
     </head>
     <body>
         <h1>Simple Billing</h1>
+        <br>
+        <form id="invoice-form" enctype="multipart/form-data" method="post">
+            <label for="client-name">Client Name:</label>
+            <input type="text" id="client-name" name="client_name" required><br><br>
+    
+            <label for="service-fee">Service Fee ($):</label>
+            <input type="number" id="service-fee" name="service_fee" step="0.01" required><br><br>
+    
+            <label for="travel-expenses">Travel Expenses ($):</label>
+            <input type="number" id="travel-expenses" name="travel_expenses" step="0.01" required><br><br>
+    
+            <label for="tax-percent">Tax ($):</label>
+            <input type="number" id="tax-percent" name="tax_percent" step="0.01" required><br><br>
+    
+            <label for="attachments">Attachments:</label>
+            <input type="file" id="attachments" name="attachments" multiple><br><br>
+    
+            <p><strong>Total: <span id="total_amount">$0.00</span></strong></p>
+    
+            <button type="submit">Submit Invoice</button>
+        </form>
+        
+        <script src="{% static 'simpleBilling/js/invoice.js' %}"></script>
     </body>
 </html>
