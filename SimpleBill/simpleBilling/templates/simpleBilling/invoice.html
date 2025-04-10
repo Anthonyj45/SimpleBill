@@ -10,6 +10,7 @@
         <h1>Simple Billing</h1>
         <br>
         <form id="invoice-form" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
             <label for="client-name">Client Name:</label>
             <input type="text" id="client-name" name="client_name" required><br><br>
     
