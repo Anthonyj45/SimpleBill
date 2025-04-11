@@ -54,7 +54,7 @@
                     </a>
                     <form method="post" action="{% url 'delete-invoice' invoice.id %}" style="display: inline;">
                         {% csrf_token %}
-                        <button id="show-form-btn" type="submit" onclick="return confirm('Are you ok deleting this bill? ');">
+                        <button type="submit" onclick="return confirm('Are you ok deleting this bill? ');">
                             Delete
                         </button>
                     </form>

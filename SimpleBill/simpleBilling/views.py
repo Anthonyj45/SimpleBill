@@ -85,6 +85,6 @@ def edit_invoice_view(request, invoice_id):
     return render(request, "simpleBilling/edit_invoice.html",  {"invoice": invoice})
 
 def delete_invoice_view(request, invoice_id):
-    invoice = get_object_or_404(Invoice, id=invoice)
+    invoice = get_object_or_404(Invoice, id=invoice_id)
     invoice.delete()
     return redirect("home")
