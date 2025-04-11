@@ -8,28 +8,32 @@
     </head>
     <body>
         <h1>Simple Billing</h1>
+
+        <button id="show-form-btn">New Bill</button>
         <br>
-        <form id="invoice-form" enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            <label for="client-name">Client Name:</label>
-            <input type="text" id="client-name" name="client_name" required><br><br>
-    
-            <label for="service-fee">Service Fee ($):</label>
-            <input type="number" id="service-fee" name="service_fee" step="0.01" required><br><br>
-    
-            <label for="travel-expenses">Travel Expenses ($):</label>
-            <input type="number" id="travel-expenses" name="travel_expenses" step="0.01" required><br><br>
-    
-            <label for="tax-percent">Tax ($):</label>
-            <input type="number" id="tax-percent" name="tax_percent" step="0.01" required><br><br>
-    
-            <label for="attachments">Attachments:</label>
-            <input type="file" id="attachments" name="attachments" multiple><br><br>
-    
-            <p><strong>Total: <span id="total_amount">$0.00</span></strong></p>
-    
-            <button type="submit">Submit Invoice</button>
-        </form>
+        <div id="form-container" style="display: none;">
+            <form id="invoice-form" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <label for="client-name">Client Name:</label>
+                <input type="text" id="client-name" name="client_name" required><br><br>
+        
+                <label for="service-fee">Service Fee ($):</label>
+                <input type="number" id="service-fee" name="service_fee" step="0.01" required><br><br>
+        
+                <label for="travel-expenses">Travel Expenses ($):</label>
+                <input type="number" id="travel-expenses" name="travel_expenses" step="0.01" required><br><br>
+        
+                <label for="tax-percent">Tax ($):</label>
+                <input type="number" id="tax-percent" name="tax_percent" step="0.01" required><br><br>
+        
+                <label for="attachments">Attachments:</label>
+                <input type="file" id="attachments" name="attachments" multiple><br><br>
+        
+                <p><strong>Total: <span id="total_amount">$0.00</span></strong></p>
+        
+                <button type="submit">Submit Invoice</button>
+            </form>
+        </div>
         
         <script src="{% static 'simpleBilling/js/invoice.js' %}"></script>
     </body>

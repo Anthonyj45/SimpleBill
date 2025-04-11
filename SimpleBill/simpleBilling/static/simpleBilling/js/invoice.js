@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const showFormBtn = document.getElementById("show-form-btn");
+    const formContainer = document.getElementById("form-container");
+
+    showFormBtn.addEventListener("click", function() {
+        formContainer.style.display = "block";
+        showFormBtn.style.display = "none";
+    });
+
     const form = document.getElementById("invoice-form");
     const invoiceBox = document.getElementById("invoices-list");
 
@@ -11,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const serviceFee = parseFloat(serviceFeeInput.value) || 0;
         const travelExpenses = parseFloat(travelExpensesInput.value) || 0;
         const taxPercent = parseFloat(taxPercentInput.value) || 0;
-
+        
         const subtotal = serviceFee + travelExpenses;
         const tax = subtotal * (taxPercent / 100);
         const total = subtotal + tax;
@@ -26,12 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const formData = new formData(form);
+        const formData = new FormData(form);
 
         fetch("", {
             method: "POST",
             headers: {
-                "X-Rquested-With": "XMLHttpRquest",
+                "X-Requested-With": "XMLHttpRequest"
             },
             body: formData
         })
