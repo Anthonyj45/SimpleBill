@@ -9,7 +9,10 @@
     <body>
         <h1>Simple Billing</h1>
 
-        <button id="show-form-btn">New Bill</button>
+        <a href="{%url 'create-invoice' %}">
+            <button id="show-form-btn">New Bill</button>
+        </a>
+        
         <br>
         <div id="form-container" style="display: none;">
             <form id="invoice-form" enctype="multipart/form-data" method="post">
@@ -33,6 +36,32 @@
         
                 <button type="submit">Submit Invoice</button>
             </form>
+        </div>
+
+        <div id=invoices-list>
+            {% for invoice in invoices%}
+                <div class="invoice-card">
+                    <h3>{{ invoice.client.name }}</h3>
+                    <p>
+                        Service Fee: ${{ invoice.service_fee }} <br>
+                        Travel Expenses: ${{ invoice.travel_expenses }} <br>
+                        Tax: {{ invoice.tax_percent }}%<br>
+                        Total: ${{ invoice.total }}<br>
+                        Created: {{ invoice.billing_date|date:"M d, Y H:i" }}
+                    </p>
+                    <a href="{%url 'edit-invoice' invoice.id %}">
+                        <button id="show-form-btn">Edit</button>
+                    </a>
+                    <form method="post" action="{% url 'delete-invoice' invoice.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button id="show-form-btn" type="submit" onclick="return confirm('Are you ok deleting this bill? ');">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            {% empty %}
+                <p> No invoices yet. </p>
+            {% endfor %}
         </div>
         
         <script src="{% static 'simpleBilling/js/invoice.js' %}"></script>

@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{% static 'simpleBilling/css/styles.css' %}">
     </head>
     <body>
-        <h1>Create a New Invoice</h1>
+        <h1>Edit Invoice</h1>
 
         <form id="invoice-form" enctype="multipart/form-data" method="post">
             {% csrf_token %}
@@ -22,9 +22,6 @@
     
             <label for="tax-percent">Tax ($):</label>
             <input type="number" id="tax-percent" name="tax_percent" step="0.01" required><br><br>
-    
-            <label for="attachments">Attachments:</label>
-            <input type="file" id="attachments" name="attachments" multiple><br><br>
     
             <p><strong>Total: <span id="total_amount">$0.00</span></strong></p>
     

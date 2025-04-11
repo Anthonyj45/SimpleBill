@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Client, Invoice, Attachment
 from decimal import Decimal
-from .forms import InvoiceForm
 from django.http import JsonResponse
 
 def create_invoice_view(request):
@@ -24,9 +23,9 @@ def create_invoice_view(request):
         for file in uploaded_files:
             Attachment.objects.create(invoice=invoice, file=file)
             
-        return redirect('invoice-success')
+        return redirect('home')
     
-    return render(request, 'simpleBilling/invoice.html')
+    return render(request, 'simpleBilling/success.html')
     
         
 def invoice_success_view(request):
@@ -73,3 +72,19 @@ def invoice_list_create_view(request):
         'invoices': invoices
     })
         
+def edit_invoice_view(request, invoice_id):
+    invoice = get_object_or_404(Invoice, id=invoice_id)
+    
+    if request.method == "POST":
+        invoice.service_fee = Decimal(request.POST.get('service_fee'))
+        invoice.travel_expenses = Decimal(request.POST.get("travel_expenses"))
+        invoice.tax_percent = Decimal(request.POST.get("tax_percent"))
+        invoice.save()
+        return redirect("home")
+    
+    return render(request, "simpleBilling/edit_invoice.html",  {"invoice": invoice})
+
+def delete_invoice_view(request, invoice_id):
+    invoice = get_object_or_404(Invoice, id=invoice)
+    invoice.delete()
+    return redirect("home")
