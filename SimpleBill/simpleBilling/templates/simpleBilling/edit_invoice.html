@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="{% static 'simpleBilling/css/styles.css' %}">
     </head>
     <body>
+        <!--Form that will be displayed when the user clicked edit-->
         <h1>Edit Invoice</h1>
-
         <form id="invoice-form" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             <label for="client-name">Client Name:</label>
